@@ -28,7 +28,7 @@ body {
 }
 
 #safefast {
-	display:block;
+	display:none;
 	float: left;
 	margin-left: 50px;
 	margin-right: 140px;

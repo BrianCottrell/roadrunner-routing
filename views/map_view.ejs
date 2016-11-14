@@ -57,7 +57,7 @@
           center: [-118.260155, 34.038356],
           zoom: 17
         });
-        routeTask = new RouteTask("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World?");
+        routeTask = new RouteTask("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
         routeParams = new RouteParameters();
         routeParams.stops = new FeatureSet();
         routeParams.barriers = new FeatureSet();
@@ -135,7 +135,7 @@
                                           "xoffset": 0,
                                           "yoffset": 12,
                                           "type": "esriPMS",
-                                          "url": "http://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
+                                          "url": "http://static.arcgis.com/images/Symbols/Animated/EnlargeRotatingRedMarkerSymbol.png",
                                           "contentType": "image/png",
                                           "width": 24,
                                           "height": 24
@@ -233,10 +233,10 @@
         //Solves the routes. Any errors will trigger the errorHandler function.
         function solveRoute() {
           //Make sure data is ready?
-          dojo.ready(function() {
+          // dojo.ready(function() {
             removeEventHandlers();
             routeTask.solve(routeParams);
-          });
+          // });
         }
         //Clears all routes
         function clearRoutes() {
@@ -249,7 +249,8 @@
         //Draws the resulting routes on the map
         function showRoute(evt) {
           //Make sure data is ready?
-          dojo.ready(function() {
+          // dojo.ready(function() {
+            clearRoutes();
             array.forEach(evt.result.routeResults, function(routeResult, i) {
               routes.push(
                 map.graphics.add(
@@ -262,10 +263,10 @@
             array.forEach(evt.result.messages, function(message) {
               msgs.push(message.type + " : " + message.description);
             });
-            if (msgs.length > 1) {
-              alert(msgs.join("\n - "));
-            }
-          });
+            // if (msgs.length > 1) {
+            //   alert(msgs.join("\n - "));
+            // }
+          // });
         }
         //Reports any errors that occurred during the solve
         function errorHandler(err) {
@@ -340,14 +341,13 @@
   <body>
     <div class="outer">
         <img class="logo" src="http://i.imgur.com/QbMfRl8.png">
-    <!--     <div id="safefast"> 
-          Select Route Setting
+        <div id="safefast"> 
           <select id="routeName">
             <option value="Route 1">Safe</option>
             <option value="Route 2">Balanced</option>
             <option value="Route 3">Fast</option>
           </select>
-        </div> -->
+        </div>
         <div id="routecreation">
           <button id="addStopsBtn">Add Stops</button>
           <button id="clearStopsBtn">Safe</button>
